@@ -9,8 +9,16 @@ can be deleted on request (GDPR compliance).
 import json
 import os
 import uuid
+import streamlit as st
 from datetime import datetime, timezone
 from config import DATA_DIR
+
+try:
+    from pymongo import MongoClient
+    from pymongo.server_api import ServerApi
+    HAS_PYMONGO = True
+except ImportError:
+    HAS_PYMONGO = False
 
 
 def save_candidate_session(
@@ -58,6 +66,28 @@ def save_candidate_session(
         "sentiment_log": sentiment_log or [],
     }
 
+    # Attempt to save to MongoDB first
+    mongodb_uri = os.environ.get("MONGODB_URI")
+    
+    # Try getting from Streamlit secrets if not in env
+    if not mongodb_uri:
+        try:
+            mongodb_uri = st.secrets.get("MONGODB_URI")
+        except Exception:
+            pass
+
+    if mongodb_uri and HAS_PYMONGO:
+        try:
+            client = MongoClient(mongodb_uri, server_api=ServerApi('1'))
+            db = client.talentscout
+            collection = db.candidates
+            collection.insert_one(session_data)
+            session_data.pop("_id", None)  # Remove internal ID
+            return session_id
+        except Exception as e:
+            print(f"MongoDB save failed, falling back to local storage: {e}")
+
+    # Fallback to local file storage
     filepath = os.path.join(DATA_DIR, f"{session_id}.json")
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(session_data, f, indent=2, ensure_ascii=False)
@@ -92,11 +122,35 @@ def _anonymize_for_storage(candidate: dict) -> dict:
 def delete_candidate_session(session_id: str) -> bool:
     """
     Delete a candidate session file (GDPR right to erasure).
+    Attempts to delete from MongoDB first, then local storage.
 
-    Returns True if the file was found and deleted, False otherwise.
+    Returns True if the file/record was found and deleted, False otherwise.
     """
+    deleted = False
+    
+    # Attempt to delete from MongoDB first
+    mongodb_uri = os.environ.get("MONGODB_URI")
+    if not mongodb_uri:
+        try:
+            mongodb_uri = st.secrets.get("MONGODB_URI")
+        except Exception:
+            pass
+
+    if mongodb_uri and HAS_PYMONGO:
+        try:
+            client = MongoClient(mongodb_uri, server_api=ServerApi('1'))
+            db = client.talentscout
+            collection = db.candidates
+            result = collection.delete_one({"session_id": session_id})
+            if result.deleted_count > 0:
+                deleted = True
+        except Exception:
+            pass
+
+    # Also try to delete local file
     filepath = os.path.join(DATA_DIR, f"{session_id}.json")
     if os.path.exists(filepath):
         os.remove(filepath)
-        return True
-    return False
+        deleted = True
+        
+    return deleted

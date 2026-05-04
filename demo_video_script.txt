@@ -1,0 +1,53 @@
+TALENT SCOUT — 4-MINUTE DEMO VIDEO SCRIPT
+=========================================
+
+[0:00 - 0:30] INTRODUCTION & ARCHITECTURE OVERVIEW
+--------------------------------------------------
+[Visual: Screen recording showing the IDE/Code editor, specifically the README architecture diagram or a high-level view of the project files.]
+Speaker: "Hello everyone, my name is [Your Name] and this is my submission for the AI/ML Intern Assignment at Valura. I've built 'Scout', an intelligent hiring assistant chatbot for the fictional recruitment agency, TalentScout. The application is built using Streamlit for the frontend, and it's powered by the Llama 3 model running on the Groq API for lightning-fast inference. Let me walk you through a live demonstration of the screening process."
+
+[0:30 - 1:30] UI WALKTHROUGH & INFORMATION GATHERING
+----------------------------------------------------
+[Visual: Switch to the Streamlit browser window showing the chatbot UI. Start a new session.]
+Speaker: "As you can see, the UI is built with a custom dark theme, glassmorphism effects, and a responsive sidebar that tracks the candidate's screening progress in real-time. 
+
+When a candidate starts a session, Scout introduces itself and asks for their full name. 
+[Action: Type 'John Doe']
+Notice how the prompt engine validates this on the fly. Let's provide an email.
+[Action: Type an invalid email like 'johndoe']
+The chatbot politely asks for a correction because it didn't recognize a valid email format. 
+[Action: Type a valid email 'john.doe@example.com']
+Now it accepts it and moves on to the phone number. Let's fill out the rest of the information — 3 years of experience, applying for a Backend Developer position, located in New York."
+[Action: Quickly type in the phone number, experience, role, and location as the chatbot prompts you. Point out how the sidebar 'Candidate Profile' updates automatically as data is collected.]
+
+[1:30 - 2:30] TECH STACK & DYNAMIC QUESTION GENERATION
+------------------------------------------------------
+[Visual: The chatbot asks for the Tech Stack.]
+Speaker: "Now we've reached a critical part of the assignment. The chatbot asks for the candidate's tech stack. I'll declare Python, Django, and PostgreSQL."
+[Action: Type 'Python, Django, PostgreSQL']
+
+Speaker: "Behind the scenes, the Conversation Manager detects this phase and uses a specialized prompt template. It takes the candidate's tech stack and their declared experience level—3 years—and dynamically generates tailored technical questions. Because we are using Groq's Llama 3 API, the generation is nearly instantaneous."
+[Visual: The chatbot generates and prints the questions.]
+Speaker: "You can see it has generated excellent, intermediate-to-advanced questions covering specific frameworks and practical scenarios, avoiding generic or overly simple questions."
+
+[2:30 - 3:00] CANDIDATE EVALUATION & BONUS FEATURES
+---------------------------------------------------
+[Visual: Candidate answers the questions.]
+Speaker: "I'll go ahead and provide a brief technical answer."
+[Action: Type a short mock answer like 'I use Django ORM to handle database queries securely and prevent SQL injection. For Python, I use list comprehensions for speed.']
+
+Speaker: "The chatbot acknowledges the answer professionally without explicitly grading them, as per the system prompt instructions. It then gracefully concludes the session, summarizing the collected info and explaining the next steps to the candidate. 
+
+I also implemented a couple of bonus features! Look at the sidebar — there is a 'Candidate Mood' sentiment badge. A secondary, lightweight LLM analyzes every user message in real-time to gauge if the candidate is positive, neutral, or frustrated."
+
+[3:00 - 3:45] DATA HANDLING & GDPR PRIVACY
+------------------------------------------
+[Visual: Switch back to the code editor. Open the 'data/candidates' folder and open the newly created JSON file.]
+Speaker: "Once the session ends, the application immediately saves the data for the recruitment team. Because Streamlit state is ephemeral, the 'Data Store' module writes the entire session to a local JSON file. 
+
+To comply with data privacy standards like GDPR, the system partially anonymizes the data before saving. Notice how the email and phone number are masked in the stored JSON file. The full conversation transcript and the sentiment logs are also perfectly preserved here for the recruiter to review later."
+
+[3:45 - 4:00] CONCLUSION
+------------------------
+[Visual: Show the GitHub repository page or just the running app again.]
+Speaker: "The entire codebase is modular, fully documented, and pushed to a public GitHub repository with strict environment variable management to protect API keys. Thank you for your time, and I look forward to your feedback!"
