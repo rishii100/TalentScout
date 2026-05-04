@@ -1,0 +1,31 @@
+# Environment
+.env
+
+# Candidate data (privacy)
+data/candidates/
+
+# Virtual environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Assignment source files
+AI_ML Intern Assignment.docx
+AI_ML Intern Assignment.md
