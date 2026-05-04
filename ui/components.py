@@ -5,8 +5,10 @@ Reusable Streamlit UI components for the TalentScout interface.
 Handles the sidebar, progress tracking, branding, and info display.
 """
 
+import os
+import json
 import streamlit as st
-from config import PHASES, PHASE_LABELS
+from config import PHASES, PHASE_LABELS, DATA_DIR
 
 
 def render_brand_header():
@@ -177,3 +179,30 @@ def render_main_header():
         """,
         unsafe_allow_html=True,
     )
+
+def render_admin_dashboard():
+    """Render the admin dashboard to view saved candidate JSON files."""
+    st.markdown("## 🔐 Admin Dashboard")
+    st.markdown("View all stored candidate screening sessions directly from the backend `data/candidates/` folder.")
+    
+    if not os.path.exists(DATA_DIR):
+        st.info("No candidate data directory found.")
+        return
+        
+    files = [f for f in os.listdir(DATA_DIR) if f.endswith(".json")]
+    
+    if not files:
+        st.info("No candidate sessions saved yet.")
+        return
+        
+    selected_file = st.selectbox("Select Candidate Session", sorted(files, reverse=True))
+    
+    if selected_file:
+        file_path = os.path.join(DATA_DIR, selected_file)
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            st.markdown(f"### 📄 Session Data: `{selected_file}`")
+            st.json(data)
+        except Exception as e:
+            st.error(f"Error reading file: {e}")

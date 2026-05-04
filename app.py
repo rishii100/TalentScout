@@ -26,6 +26,7 @@ from ui.components import (
     render_sentiment_badge,
     render_new_session_button,
     render_main_header,
+    render_admin_dashboard,
 )
 
 # ── Page Configuration ────────────────────────────────────────────────
@@ -69,6 +70,11 @@ render_progress(cm.phase)
 render_candidate_info(cm.candidate)
 render_sentiment_badge(st.session_state.sentiment)
 render_new_session_button()
+
+st.sidebar.markdown("---")
+if st.sidebar.toggle("🔐 Admin Mode"):
+    render_admin_dashboard()
+    st.stop()
 
 # ── Main Chat Area ────────────────────────────────────────────────────
 render_main_header()
