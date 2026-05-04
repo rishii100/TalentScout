@@ -30,7 +30,7 @@ from ui.components import (
 
 # ── Page Configuration ────────────────────────────────────────────────
 st.set_page_config(
-    page_title=f"{APP_TITLE} — AI Hiring Assistant",
+    page_title=f"{APP_TITLE} : AI Hiring Assistant",
     page_icon=APP_ICON,
     layout="centered",
     initial_sidebar_state="expanded",
