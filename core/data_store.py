@@ -78,16 +78,20 @@ def save_candidate_session(
 
     if mongodb_uri and HAS_PYMONGO:
         try:
-            client = MongoClient(mongodb_uri, server_api=ServerApi('1'))
+            print(f"DEBUG: Attempting to save to MongoDB...")
+            client = MongoClient(mongodb_uri, server_api=ServerApi('1'), serverSelectionTimeoutMS=5000)
             db = client.talentscout
             collection = db.candidates
             collection.insert_one(session_data)
+            print(f"DEBUG: Successfully saved to MongoDB (Session ID: {session_id})")
             session_data.pop("_id", None)  # Remove internal ID
             return session_id
         except Exception as e:
-            print(f"MongoDB save failed, falling back to local storage: {e}")
+            print(f"DEBUG: MongoDB save failed: {e}")
+            print("DEBUG: Falling back to local storage...")
 
     # Fallback to local file storage
+    print(f"DEBUG: Saving to local file storage (Session ID: {session_id})")
     filepath = os.path.join(DATA_DIR, f"{session_id}.json")
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(session_data, f, indent=2, ensure_ascii=False)
