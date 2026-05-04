@@ -35,17 +35,17 @@ PHASES = [
 
 # Human-readable labels for the sidebar progress tracker
 PHASE_LABELS = {
-    "GREETING": "👋 Welcome",
-    "COLLECTING_NAME": "📝 Full Name",
-    "COLLECTING_EMAIL": "📧 Email Address",
-    "COLLECTING_PHONE": "📱 Phone Number",
-    "COLLECTING_EXPERIENCE": "💼 Experience",
-    "COLLECTING_POSITION": "🎯 Desired Position",
-    "COLLECTING_LOCATION": "📍 Location",
-    "COLLECTING_TECH_STACK": "🛠️ Tech Stack",
-    "GENERATING_QUESTIONS": "⚙️ Preparing Questions",
-    "ASKING_QUESTIONS": "❓ Technical Assessment",
-    "FAREWELL": "✅ Complete",
+    "GREETING": " Welcome",
+    "COLLECTING_NAME": " Full Name",
+    "COLLECTING_EMAIL": " Email Address",
+    "COLLECTING_PHONE": " Phone Number",
+    "COLLECTING_EXPERIENCE": " Experience",
+    "COLLECTING_POSITION": " Desired Position",
+    "COLLECTING_LOCATION": " Location",
+    "COLLECTING_TECH_STACK": " Tech Stack",
+    "GENERATING_QUESTIONS": " Preparing Questions",
+    "ASKING_QUESTIONS": " Technical Assessment",
+    "FAREWELL": " Complete",
 }
 
 # ── Exit Keywords ─────────────────────────────────────────────────────
@@ -61,6 +61,6 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "data", "candidates")
 # ── UI Constants ──────────────────────────────────────────────────────
 APP_TITLE = "TalentScout"
 APP_SUBTITLE = "Intelligent Hiring Assistant"
-APP_ICON = "🎯"
+APP_ICON = ""
 ASSISTANT_AVATAR = "🤖"
 USER_AVATAR = "👤"
