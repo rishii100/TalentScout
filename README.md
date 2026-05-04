@@ -1,10 +1,10 @@
 # 🎯 TalentScout — Intelligent Hiring Assistant
 
-An AI-powered chatbot that conducts initial candidate screenings for **TalentScout**, a technology recruitment agency. Built with **Streamlit** and **Google Gemini 2.0 Flash**, the assistant collects candidate information and generates tailored technical interview questions based on the candidate's declared tech stack.
+An AI-powered chatbot that conducts initial candidate screenings for **TalentScout**, a technology recruitment agency. Built with **Streamlit** and **Llama 3 via Groq**, the assistant collects candidate information and generates tailored technical interview questions based on the candidate's declared tech stack.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red?logo=streamlit)
-![Gemini](https://img.shields.io/badge/Gemini_2.0_Flash-API-orange?logo=google)
+![Groq](https://img.shields.io/badge/Groq-Llama_3-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
@@ -59,36 +59,23 @@ The chatbot maintains full conversation context, validates inputs, handles edge 
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   Streamlit UI                       │
-│  ┌──────────┐  ┌────────────────────────────────┐   │
-│  │ Sidebar  │  │        Chat Interface           │   │
-│  │ - Brand  │  │  [User Message]                 │   │
-│  │ - Progress│  │  [Assistant Response]           │   │
-│  │ - Info   │  │  [Chat Input]                   │   │
-│  │ - Mood   │  │                                 │   │
-│  └──────────┘  └────────────────────────────────┘   │
-└───────────────────────┬─────────────────────────────┘
-                        │
-                ┌───────▼───────┐
-                │ Conversation  │
-                │   Manager     │ ← State Machine (11 phases)
-                └───────┬───────┘
-                        │
-          ┌─────────────┼─────────────┐
-          │             │             │
-   ┌──────▼──────┐ ┌───▼───┐  ┌─────▼─────┐
-   │ Prompt      │ │  LLM  │  │   Data    │
-   │ Engine      │ │Wrapper│  │   Store   │
-   │ (Templates) │ │(Gemini│  │  (JSON)   │
-   └─────────────┘ └───────┘  └───────────┘
-          │
-   ┌──────▼──────────────────┐
-   │   Bonus Modules         │
-   │ - Sentiment Analyzer    │
-   │ - Language Detector     │
-   └─────────────────────────┘
+```mermaid
+graph TD
+    A["👤 Candidate"] -->|interacts| B["Streamlit UI"]
+    B -->|user message| C["Conversation Manager"]
+    C -->|builds prompt| D["Prompt Engine"]
+    D -->|API call| E["Llama 3 (Groq)"]
+    E -->|response| C
+    C -->|updates| F["Session State"]
+    F -->|renders| B
+    C -->|stores| G["Data Store (JSON)"]
+
+    subgraph "Bonus Modules"
+        H["Sentiment Analyzer"]
+        I["Multilingual Detector"]
+    end
+    C --> H
+    C --> I
 ```
 
 ### Conversation State Machine
@@ -111,7 +98,7 @@ Each phase has:
 
 ### Prerequisites
 - Python 3.10+
-- A Google Gemini API key ([Get one free here](https://aistudio.google.com/apikey))
+- A Groq API key ([Get one free here](https://console.groq.com/keys))
 
 ### Steps
 
@@ -135,7 +122,7 @@ Each phase has:
 4. **Set up your API key**
    ```bash
    cp .env.example .env
-   # Edit .env and add your Gemini API key
+   # Edit .env and add your Groq API key
    ```
 
 5. **Run the application**
@@ -169,16 +156,16 @@ Each phase has:
 | Library | Version | Purpose |
 |---------|---------|---------|
 | `streamlit` | ≥1.30.0 | Frontend UI framework |
-| `google-generativeai` | ≥0.5.0 | Gemini API SDK |
+| `groq` | ≥0.4.0 | Groq API SDK (Llama 3) |
 | `python-dotenv` | ≥1.0.0 | Environment variable management |
 
-### Model: Gemini 2.0 Flash
+### Model: Llama 3 via Groq
 
-**Why Gemini?**
-- **Free tier** — No API costs for development and demo
-- **Speed** — Flash variant optimized for low-latency responses
-- **Quality** — Excellent instruction-following and context retention
-- **Multilingual** — Native support for 100+ languages (bonus feature)
+**Why Groq & Llama?**
+- **Incredible Speed** — Groq's LPU architecture provides instant, real-time responses
+- **Quality** — `llama-3.3-70b-versatile` offers top-tier instruction following and context retention
+- **Efficiency** — Uses the smaller `llama-3.1-8b-instant` model for quick auxiliary tasks (sentiment/language detection) to save API quota
+- **Free tier** — Generous free tier for development
 
 **Configuration:**
 - Temperature: `0.7` (balanced creativity/consistency for conversations)
@@ -241,7 +228,7 @@ When input doesn't match the expected phase:
 - **Local Storage** — All data stored locally in `data/candidates/` as JSON files
 - **Anonymization** — Email and phone are masked in stored data (original kept for recruiter access)
 - **Right to Erasure** — `delete_candidate_session(session_id)` function available
-- **No External Transmission** — Data never leaves the local system (except API calls to Gemini for response generation)
+- **No External Transmission** — Data never leaves the local system (except API calls to Groq for response generation)
 - **Gitignored** — The `data/candidates/` directory is excluded from version control
 - **Minimal Collection** — Only essential screening information is gathered
 
@@ -310,7 +297,7 @@ talentscout/
 │   ├── __init__.py
 │   ├── conversation.py         # Conversation state machine
 │   ├── prompts.py              # All prompt templates
-│   ├── llm.py                  # Gemini API wrapper
+│   ├── llm.py                  # Groq (Llama) API wrapper
 │   └── data_store.py           # JSON data persistence
 │
 ├── modules/                    # Bonus feature modules
@@ -339,5 +326,5 @@ This project was built as part of an AI/ML internship assignment. All code is or
 ---
 
 <p align="center">
-  Built with ❤️ using <a href="https://streamlit.io">Streamlit</a> & <a href="https://ai.google.dev">Google Gemini</a>
+  Built with ❤️ using <a href="https://streamlit.io">Streamlit</a> & <a href="https://groq.com/">Groq</a>
 </p>
