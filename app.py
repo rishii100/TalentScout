@@ -70,16 +70,6 @@ render_candidate_info(cm.candidate)
 render_sentiment_badge(st.session_state.sentiment)
 render_new_session_button()
 
-# Sidebar footer
-st.sidebar.markdown("---")
-st.sidebar.markdown(
-    """<p style="text-align:center; font-size:0.7rem; color:#6B6B8D;">
-    Built with ❤️ using Streamlit & Gemini<br>
-    © 2025 TalentScout AI
-    </p>""",
-    unsafe_allow_html=True,
-)
-
 # ── Main Chat Area ────────────────────────────────────────────────────
 render_main_header()
 
