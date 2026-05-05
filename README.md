@@ -2,11 +2,6 @@
 
 An AI-powered chatbot that conducts initial candidate screenings for **TalentScout**, a technology recruitment agency. Built with **Streamlit** and **Llama 3 via Groq**, the assistant collects candidate information and generates tailored technical interview questions based on the candidate's declared tech stack.
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red?logo=streamlit)
-![Groq](https://img.shields.io/badge/Groq-Llama_3-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
-
 ---
 
 ## 📋 Table of Contents
@@ -104,14 +99,14 @@ Each phase has:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/talentscout.git
+   git clone https://github.com/rishii100/talentscout.git
    cd talentscout
    ```
 
 2. **Create a virtual environment** (recommended)
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  
    ```
 
 3. **Install dependencies**
@@ -122,7 +117,7 @@ Each phase has:
 4. **Set up your API key**
    ```bash
    cp .env.example .env
-   # Edit .env and add your Groq API key and custom Admin credentials
+   
    ```
 
 5. **Run the application**
