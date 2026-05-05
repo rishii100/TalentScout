@@ -4,7 +4,7 @@ An AI-powered chatbot that conducts initial candidate screenings for **TalentSco
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
