@@ -59,6 +59,8 @@ def init_session():
         st.session_state.detected_language = "English"
     if "session_saved" not in st.session_state:
         st.session_state.session_saved = False
+    if "admin_authenticated" not in st.session_state:
+        st.session_state.admin_authenticated = False
 
 
 init_session()
@@ -73,8 +75,27 @@ render_new_session_button()
 
 st.sidebar.markdown("---")
 if st.sidebar.toggle("🔐 Admin Mode"):
-    render_admin_dashboard()
-    st.stop()
+    if not st.session_state.admin_authenticated:
+        st.markdown("## 🔐 Admin Login")
+        with st.form("admin_login"):
+            username = st.text_input("Username")
+            password = st.text_input("Password", type="password")
+            submit = st.form_submit_button("Login")
+            
+            if submit:
+                from config import ADMIN_USERNAME, ADMIN_PASSWORD
+                if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+                    st.session_state.admin_authenticated = True
+                    st.rerun()
+                else:
+                    st.error("Invalid credentials")
+        st.stop()
+    else:
+        if st.sidebar.button("Logout"):
+            st.session_state.admin_authenticated = False
+            st.rerun()
+        render_admin_dashboard()
+        st.stop()
 
 # ── Main Chat Area ────────────────────────────────────────────────────
 render_main_header()

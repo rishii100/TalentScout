@@ -17,6 +17,10 @@ GROQ_MODEL_FAST = "llama-3.1-8b-instant"     # Fast model for sentiment/language
 GROQ_TEMPERATURE = 0.7
 GROQ_MAX_TOKENS = 2048
 
+# ── Admin Credentials ─────────────────────────────────────────────────
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin")
+
 # ── Conversation Phases ───────────────────────────────────────────────
 # Ordered phases the conversation progresses through
 PHASES = [
