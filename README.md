@@ -122,7 +122,7 @@ Each phase has:
 4. **Set up your API key**
    ```bash
    cp .env.example .env
-   # Edit .env and add your Groq API key
+   # Edit .env and add your Groq API key and custom Admin credentials
    ```
 
 5. **Run the application**
@@ -255,6 +255,12 @@ When input doesn't match the expected phase:
 - Progress bar with gradient fill
 - Responsive chat bubble design
 - Custom scrollbar styling
+
+### 🔐 Secure Admin Dashboard
+- Integrated directly into the Streamlit UI via a sidebar toggle
+- Protected by environment variable credentials (`ADMIN_USERNAME` and `ADMIN_PASSWORD`)
+- Allows recruiters to instantly view saved candidate JSON files and transcripts
+- Eliminates the need for external database setup during local development and cloud demos
 
 ---
 
