@@ -323,9 +323,3 @@ talentscout/
 ## License
 
 This project was built as part of an AI/ML internship assignment. All code is original and open for review.
-
----
-
-<p align="center">
-  Built with ❤️ using <a href="https://streamlit.io">Streamlit</a> & <a href="https://groq.com/">Groq</a>
-</p>
