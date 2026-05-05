@@ -1,4 +1,4 @@
-# 🎯 TalentScout — Intelligent Hiring Assistant
+# 🎯 TalentScout : Intelligent Hiring Assistant
 
 An AI-powered chatbot that conducts initial candidate screenings for **TalentScout**, a technology recruitment agency. Built with **Streamlit** and **Llama 3 via Groq**, the assistant collects candidate information and generates tailored technical interview questions based on the candidate's declared tech stack.
 
