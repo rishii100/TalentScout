@@ -1,4 +1,4 @@
-# 🎯 TalentScout : Intelligent Hiring Assistant
+#  TalentScout : Intelligent Hiring Assistant
 
 An AI-powered chatbot that conducts initial candidate screenings for **TalentScout**, a technology recruitment agency. Built with **Streamlit** and **Llama 3 via Groq**, the assistant collects candidate information and generates tailored technical interview questions based on the candidate's declared tech stack.
 
@@ -37,18 +37,18 @@ The chatbot maintains full conversation context, validates inputs, handles edge 
 ## Features
 
 ### Core
-- ✅ **Conversational Screening** — Natural, step-by-step information gathering
-- ✅ **Dynamic Technical Questions** — Generated based on candidate's tech stack & experience level
-- ✅ **Input Validation** — Email, phone, and field-specific validation with gentle correction prompts
-- ✅ **Context Awareness** — Full conversation history maintained for coherent follow-ups
-- ✅ **Fallback Handling** — Graceful redirect for off-topic or unexpected inputs
-- ✅ **Exit Detection** — Keywords like "bye", "quit", "exit" trigger graceful conclusion
-- ✅ **Session Persistence** — Candidate data saved as JSON for recruiter review
+-  **Conversational Screening** — Natural, step-by-step information gathering
+-  **Dynamic Technical Questions** — Generated based on candidate's tech stack & experience level
+-  **Input Validation** — Email, phone, and field-specific validation with gentle correction prompts
+-  **Context Awareness** — Full conversation history maintained for coherent follow-ups
+-  **Fallback Handling** — Graceful redirect for off-topic or unexpected inputs
+-  **Exit Detection** — Keywords like "bye", "quit", "exit" trigger graceful conclusion
+-  **Session Persistence** — Candidate data saved as JSON for recruiter review
 
 ### Bonus
-- 🎁 **Sentiment Analysis** — Real-time candidate mood tracking displayed in the sidebar
-- 🎁 **Multilingual Support** — Auto-detects non-English input and provides bilingual responses
-- 🎁 **Premium UI** — Custom dark theme with glassmorphism, animations, and gradient accents
+-  **Sentiment Analysis** — Real-time candidate mood tracking displayed in the sidebar
+-  **Multilingual Support** — Auto-detects non-English input and provides bilingual responses
+-  **Premium UI** — Custom dark theme with glassmorphism, animations, and gradient accents
 
 ---
 
@@ -231,19 +231,19 @@ When input doesn't match the expected phase:
 
 ## Bonus Features
 
-### 🧠 Sentiment Analysis
+###  Sentiment Analysis
 - Each candidate message is analyzed for emotional tone
 - Categories: Positive, Neutral, Negative, Frustrated, Excited, Confused
 - Displayed as a color-coded badge in the sidebar
 - Logged in session data for recruiter insight
 
-### 🌍 Multilingual Support
+###  Multilingual Support
 - Auto-detects the candidate's language from their messages
 - Supports 20+ languages including Hindi, Spanish, French, German, and more
 - When non-English is detected, responses include bilingual translations
 - Language detection runs on early messages to minimize API calls
 
-### 🎨 Premium UI
+###  Premium UI
 - Custom dark theme with Inter font
 - Glassmorphism effects and gradient accents
 - Smooth message slide-in animations
@@ -251,7 +251,7 @@ When input doesn't match the expected phase:
 - Responsive chat bubble design
 - Custom scrollbar styling
 
-### 🔐 Secure Admin Dashboard
+###  Secure Admin Dashboard
 - Integrated directly into the Streamlit UI via a sidebar toggle
 - Protected by environment variable credentials (`ADMIN_USERNAME` and `ADMIN_PASSWORD`)
 - Allows recruiters to instantly view saved candidate JSON files and transcripts
