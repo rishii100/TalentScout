@@ -12,7 +12,7 @@ load_dotenv()
 
 # ── Groq API (Llama) ──────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = "llama-3.3-70b-versatile"       # Primary model
+GROQ_MODEL = "openai/gpt-oss-120b"       # Primary model
 GROQ_MODEL_FAST = "llama-3.1-8b-instant"     # Fast model for sentiment/language tasks
 GROQ_TEMPERATURE = 0.7
 GROQ_MAX_TOKENS = 2048
